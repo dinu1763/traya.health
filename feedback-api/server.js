@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
-const cors = require("cors");
 
 const app = express();
 const PORT = 3001;
@@ -9,11 +8,18 @@ const MONGODB_URI =
   "mongodb+srv://dinu1763:Kums1763@dinucluster.nfiiq.mongodb.net/?retryWrites=true&w=majority"; // MongoDB connection URI
 
 // CORS middleware
-app.use(
-  cors({
-    origin: "https://dainty-kulfi-e207ed.netlify.app/",
-  })
-);
+app.use(function (req, res, next) {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://dainty-kulfi-e207ed.netlify.app/"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  next();
+});
 
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(bodyParser.urlencoded({ extended: false }));
