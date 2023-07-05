@@ -7,6 +7,19 @@ const PORT = 3001;
 const MONGODB_URI =
   "mongodb+srv://dinu1763:Kums1763@dinucluster.nfiiq.mongodb.net/?retryWrites=true&w=majority"; // MongoDB connection URI
 
+// CORS middleware
+app.use(function (req, res, next) {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://dainty-kulfi-e207ed.netlify.app/"
+  );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // Parse URL-encoded bodies (as sent by HTML forms)
 app.use(bodyParser.urlencoded({ extended: false }));
 
